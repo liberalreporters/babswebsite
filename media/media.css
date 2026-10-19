@@ -1,0 +1,17 @@
+/* media/media.css — simple responsive layout */
+:root{--accent:#2a7ae2;--bg:#ffffff;--text:#111}
+*{box-sizing:border-box}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;line-height:1.45;color:var(--text);background:var(--bg);margin:0}
+.container{max-width:900px;margin:0 auto;padding:20px}
+.site-header{background:var(--accent);color:#fff;padding:28px 0}
+.site-header h1{margin:0;font-size:1.6rem}
+.tag{opacity:0.9;margin-top:6px}
+.hero{display:flex;gap:20px;align-items:center;margin:28px 0}
+.hero-img{width:180px;height:auto;border-radius:8px}
+.hero-text h2{margin-top:0}
+.news{background:#f7f9fc;padding:16px;border-radius:8px}
+.footer{margin:40px 0;text-align:center;color:#666}
+@media (max-width:640px){
+  .hero{flex-direction:column;text-align:center}
+  .hero-img{width:80%}
+}

@@ -1,5 +1,21 @@
 {
   "schemaVersion": 1,
-  "items": [],
+  "items": [
+    {
+      "id": "announcement-town-hall-meeting",
+      "title": "Community Town Hall Meeting",
+      "date": "2026-10-20",
+      "category": "Upcoming Event",
+      "summary": "Residents are invited to a town hall meeting to discuss local priorities, public service delivery, and community development.",
+      "body": "The campaign team will host a community town hall meeting for residents, youth representatives, traders, and community stakeholders to discuss key local issues, development priorities, and practical ways to improve governance and service delivery in Ibarapa East.",
+      "image": "https://images.example.com/announcements/town-hall.jpg",
+      "imageAlt": "Residents attending a community town hall meeting",
+      "status": "published",
+      "startDate": "2026-10-25",
+      "endDate": "2026-10-25",
+      "contact": "info@babatundeogunlade.com",
+      "source": "Official campaign office"
+    }
+  ],
   "publishingNote": "Add only verified, approved content. Keep drafts out of the public site."
 }

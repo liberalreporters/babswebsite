@@ -1,5 +1,19 @@
 {
   "schemaVersion": 1,
-  "items": [],
-  "publishingNote": "Add only verified, approved news items. Keep drafts out of the public site."
+  "items": [
+    {
+      "id": "news-community-support-initiative",
+      "title": "Campaign Team Launches Community Support Initiative",
+      "date": "2026-10-20",
+      "category": "News",
+      "summary": "The initiative is designed to support families, strengthen local welfare structures, and improve grassroots access to essential services.",
+      "image": "https://images.example.com/news/community-support.jpg",
+      "imageAlt": "Residents and volunteers during a community support outreach",
+      "author": "Media Team",
+      "status": "published",
+      "url": "https://babatundeogunlade.com",
+      "source": "Official media desk"
+    }
+  ],
+  "publishingNote": "Add only approved news items. Keep drafts out of the public site."
 }

@@ -1,5 +1,18 @@
 {
   "schemaVersion": 1,
-  "items": [],
-  "publishingNote": "Add only authorised photographs with accurate dates, captions, alt text and credits."
+  "items": [
+    {
+      "id": "gallery-community-engagement-visit",
+      "title": "Community Engagement Visit",
+      "date": "2026-10-20",
+      "location": "Eruwa, Oyo State",
+      "category": "Community",
+      "image": "https://images.example.com/gallery/community-engagement.jpg",
+      "alt": "Community members listening during an engagement visit",
+      "status": "published",
+      "caption": "Residents attending a community engagement session in Eruwa.",
+      "credit": "BABS Media Team"
+    }
+  ],
+  "publishingNote": "Add only authorised photographs with accurate dates and alt text."
 }

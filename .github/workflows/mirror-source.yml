@@ -1,0 +1,44 @@
+name: Mirror complete BABS website source
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 */6 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mirror-babs-source
+  cancel-in-progress: false
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Cloudflare staging repository
+        uses: actions/checkout@v4
+        with:
+          ref: cloudflare-prep
+          fetch-depth: 0
+
+      - name: Fetch the authoritative website source
+        run: |
+          git clone --depth 1 https://github.com/liberalreporters/babatundeogunladewebsite.git /tmp/babs-source
+          rsync -a --delete \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='CLOUDFLARE-MIGRATION.md' \
+            /tmp/babs-source/ ./
+
+      - name: Commit mirrored source files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Source already up to date."
+            exit 0
+          fi
+          git commit -m "chore: mirror authoritative BABS website source"
+          git push origin HEAD:cloudflare-prep

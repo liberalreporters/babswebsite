@@ -9,32 +9,10 @@ site_url: https://babswebsite-preview.liberalreporters.workers.dev
 display_url: https://babswebsite-preview.liberalreporters.workers.dev
 locale: en
 
-# Cloudinary stores the photographs; the CMS saves full HTTPS delivery URLs.
-# Replace the two public identifiers with values from your Cloudinary Console.
-# Never put the Cloudinary API secret in this file.
-media_library:
-  name: cloudinary
-  output_filename_only: false
-  config:
-    cloud_name: YOUR_CLOUDINARY_CLOUD_NAME
-    api_key: YOUR_CLOUDINARY_API_KEY
-    multiple: true
-    max_files: 30
-
+# Images are stored directly in the GitHub content repository. This avoids a paid external media service.
 # Fallback repository uploads.
 media_folder: "assets/images/cms"
 public_folder: "/assets/images/cms"
-
-# Optimise direct repository image uploads.
-media_processing:
-  enabled: true
-  format:
-    enabled: true
-    default: webp
-  quality: 82
-  strip_metadata: true
-  width: 1600
-  height: null
 
 collections:
   - name: "press_centre"

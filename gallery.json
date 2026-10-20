@@ -2,17 +2,65 @@
   "schemaVersion": 1,
   "items": [
     {
-      "id": "gallery-community-engagement-visit",
-      "title": "Community Engagement Visit",
+      "id": "gallery-senator-alli-welcome-poster",
+      "title": "Senator Sharafadeen Abiodun Alli Welcome Poster",
       "date": "2026-10-20",
-      "location": "Eruwa, Oyo State",
-      "category": "Community",
-      "image": "https://images.example.com/gallery/community-engagement.jpg",
-      "alt": "Community members listening during an engagement visit",
+      "location": "Ibarapa land",
+      "category": "Welcome Banners",
+      "image": "/FB_IMG_1791776326350.jpg",
+      "alt": "Welcome poster for Senator Sharafadeen Abiodun Alli signed by Hon. Babatunde Ogunlade",
       "status": "published",
-      "caption": "Residents attending a community engagement session in Eruwa.",
+      "caption": "Welcome banner from Hon. Babatunde Sunday Ogunlade to Senator Sharafadeen Abiodun Alli as the APC governorship candidate is warmly received across Ibarapa land.",
       "credit": "BABS Media Team"
+    },
+    {
+      "id": "gallery-pbat-walk-allisoji",
+      "title": "PBAT Walk with AlliSoji 2027",
+      "date": "2026-10-17",
+      "location": "Oyo State",
+      "category": "Rallies & Events",
+      "image": "/IMG-20260918-WA0009.jpg",
+      "alt": "Hon. Babatunde Sunday Ogunlade and other APC Assembly candidates at the PBAT Walk with AlliSoji 2027 rally",
+      "status": "published",
+      "caption": "APC House of Assembly candidates stood in solidarity during the PBAT Walk with AlliSoji 2027 campaign rally.",
+      "credit": "BABS Media Team"
+    },
+    {
+      "id": "gallery-bso-support-group-donation",
+      "title": "BSO Support Group Donation of Campaign Materials",
+      "date": "2026-10-20",
+      "location": "Eruwa",
+      "category": "Support Groups",
+      "image": "/FB_IMG_1791776477208.jpg",
+      "alt": "BSO Support Group presenting campaign banner materials and ludo games",
+      "status": "published",
+      "caption": "The BSO Support Group donated 50 street pole banners and campaign ludo games to strengthen grassroots mobilization efforts.",
+      "credit": "BSO Support Group"
+    },
+    {
+      "id": "gallery-vote-the-right-man",
+      "title": "Vote the Right Man Campaign Flier",
+      "date": "2026-10-20",
+      "location": "Ibarapa East",
+      "category": "Campaign Graphics",
+      "image": "/babatunde-ogunlade-poster.jpg",
+      "alt": "Campaign flier for Hon. Babatunde Ogunlade as OYHA candidate",
+      "status": "published",
+      "caption": "Official campaign graphic encouraging residents to vote for Hon. Babatunde Sunday Ogunlade in the 2027 election.",
+      "credit": "BABS Campaign Office"
+    },
+    {
+      "id": "gallery-grand-finale-ward-tour",
+      "title": "Grand Finale Ward Tour Coverage",
+      "date": "2026-10-20",
+      "location": "Ward 02, Anko, Eruwa",
+      "category": "Press & Media",
+      "image": "/IMG-20260918-WA0003.jpg",
+      "alt": "Coverage of the grand finale ward tour for Hon. Babatunde Sunday Ogunlade",
+      "status": "published",
+      "caption": "The grand finale of the constituency ward tour drew residents, leaders, and grassroots supporters for a historic engagement event.",
+      "credit": "The Factual Media Outlet"
     }
   ],
-  "publishingNote": "Add only authorised photographs with accurate dates and alt text."
+  "publishingNote": "Add only authorised photographs with accurate dates, captions, alt text and credits."
 }

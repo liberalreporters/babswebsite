@@ -131,9 +131,35 @@ export default {
     if (url.pathname.startsWith("/api/")) {
       return new Response("Not found", { status: 404, headers: securityHeaders() });
     }
-    const assetResponse = await env.ASSETS.fetch(request);
-    const headers = new Headers(assetResponse.headers);
+    const path = url.pathname === "/" ? "index.html" : url.pathname.replace(/^\\/+/, "");
+    let decodedPath;
+    try { decodedPath = decodeURIComponent(path); } catch { return new Response("Bad path", { status: 400 }); }
+    if (decodedPath.split("/").some((part) => part === ".." || part === ".")) {
+      return new Response("Bad path", { status: 400 });
+    }
+    const encodedPath = decodedPath.split("/").map(encodeURIComponent).join("/");
+    const upstreamUrl = "https://raw.githubusercontent.com/liberalreporters/babswebsite/cloudflare-prep/" + encodedPath;
+    const upstream = await fetch(upstreamUrl, { headers: { Accept: "*/*", "User-Agent": "BABS-Cloudflare-Preview" } });
+    if (!upstream.ok) {
+      return new Response(upstream.status === 404 ? "Not found" : "Preview source unavailable", {
+        status: upstream.status === 404 ? 404 : 502,
+        headers: securityHeaders({ "Content-Type": "text/plain; charset=utf-8" }),
+      });
+    }
+    const headers = new Headers(upstream.headers);
+    headers.set("Cache-Control", "no-store");
     headers.set("X-Robots-Tag", "noindex, nofollow");
-    return new Response(assetResponse.body, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
+    const mime = {
+      ".html": "text/html; charset=utf-8", ".css": "text/css; charset=utf-8",
+      ".js": "text/javascript; charset=utf-8", ".json": "application/json; charset=utf-8",
+      ".yml": "text/yaml; charset=utf-8", ".yaml": "text/yaml; charset=utf-8",
+      ".svg": "image/svg+xml", ".jpg": "image/jpeg", ".jpeg": "image/jpeg",
+      ".png": "image/png", ".webp": "image/webp", ".xml": "application/xml; charset=utf-8",
+      ".txt": "text/plain; charset=utf-8",
+    };
+    const dot = decodedPath.lastIndexOf(".");
+    const ext = dot >= 0 ? decodedPath.slice(dot).toLowerCase() : "";
+    if (mime[ext]) headers.set("Content-Type", mime[ext]);
+    return new Response(upstream.body, { status: upstream.status, headers });
   },
 };

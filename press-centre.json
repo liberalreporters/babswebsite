@@ -2,17 +2,31 @@
   "schemaVersion": 1,
   "items": [
     {
-      "id": "press-release-community-engagement",
-      "title": "Official Press Statement on Community Engagement",
+      "id": "vision-to-lead-capacity-to-deliver",
+      "title": "HON. BABATUNDE SUNDAY OGUNLADE (BABS) UNVEILS THE VISION TO LEAD, CAPACITY TO DELIVER LEGISLATIVE BLUEPRINT FOR IBARAPA EAST 2027",
       "date": "2026-10-20",
       "category": "Press Release",
-      "summary": "Babatunde Sunday Ogunlade reaffirmed his commitment to inclusive development and direct engagement with residents across Ibarapa East.",
-      "body": "Babatunde Sunday Ogunlade, candidate of the All Progressives Congress (APC), held a structured engagement with community leaders, traders, youth groups, and residents to discuss development priorities, infrastructure needs, and inclusive governance. The session focused on practical, people-centered solutions to strengthen access to education, healthcare, security, and local economic growth. The campaign team reiterated its commitment to transparent communication and responsive leadership in the constituency.",
-      "image": "https://images.example.com/press/community-engagement.jpg",
-      "imageAlt": "Community members and leaders meeting with Babatunde Sunday Ogunlade",
-      "author": "BABS Media Team",
+      "summary": "Hon. Babatunde Sunday Ogunlade formally presented a strategic campaign brochure and legislative agenda focused on six core delivery pillars for Ibarapa East.",
+      "body": "ERUWA, OYO STATE — Hon. Babatunde Sunday Ogunlade (BABS), the All Progressives Congress (APC) candidate for the Oyo State House of Assembly (Ibarapa East Constituency), has formally presented his strategic campaign brochure and legislative agenda ahead of the 2027 general elections. Rooted in professional competence, over two decades of progressive party loyalty, and a strong history of community service in Ibarapa East, Hon. Ogunlade’s platform centers on six core delivery pillars designed to translate legislative oversight into tangible grassroots outcomes: Legislative Excellence, Youth Empowerment, Infrastructural Development, Agricultural Support, Education & Student Welfare, and Community Welfare. \"Ibarapa East deserves transparent, accountable, and vibrant representation,\" said Hon. Ogunlade. \"Our commitment is built on laws that work, oversight that bites, and development that reaches every ward.\"",
+      "image": "/babatunde-ogunlade-poster.jpg",
+      "imageAlt": "Official campaign brochure cover for Hon. Babatunde Sunday Ogunlade",
+      "author": "BABS Media & Communications Directorate",
       "status": "published",
       "source": "Official press office",
+      "url": "https://babatundeogunlade.com"
+    },
+    {
+      "id": "grassroots-engagement-wrd-tour",
+      "title": "Ogunlade Assures Ibarapa East Residents of Inclusive Representation and Empowerment at Grand Finale of Ward Tour",
+      "date": "2026-10-19",
+      "category": "Official Statement",
+      "summary": "The APC candidate concluded his ward tour and emphasized direct community engagement, empowerment, and inclusive representation for all residents.",
+      "body": "The All Progressives Congress (APC) candidate for Ibarapa East State Constituency in the 2027 Oyo State House of Assembly election, Hon. Babatunde Sunday Ogunlade (BABS), has assured residents of inclusive representation, economic empowerment, and direct community engagement if elected into office. Speaking at the grand finale of his constituency-wide ward tour and empowerment initiative for widows, the aged, and the less privileged held at Ward 02, Anwaru-Islam School, Anko, Eruwa, Hon. Ogunlade emphasized that effective representation requires sustained grassroots contact. \"Our people deserve a representative who will listen to them, stand with them, and ensure that nobody is left behind. Our widows, elderly people, youths, women, and vulnerable members of our communities all have a place in our vision for a better Ibarapa East,\" Ogunlade stated. The tour spanned multiple wards across Eruwa and Lanlate, creating direct channels for community leaders, youth groups, and party faithful to share priorities for the upcoming legislative term.",
+      "image": "/FB_IMG_1791776832274.jpg",
+      "imageAlt": "Hon. Babatunde Sunday Ogunlade speaking during the ward tour finale",
+      "author": "BABS Media Team",
+      "status": "published",
+      "source": "Official media desk",
       "url": "https://babatundeogunlade.com"
     }
   ],

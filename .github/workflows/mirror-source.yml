@@ -41,7 +41,7 @@ jobs:
 
       - name: Validate mirrored website before committing
         run: |
-          python -m unittest tests/check_site.py -v
+          python tests/check_site.py
 
       - name: Commit mirrored source files
         run: |

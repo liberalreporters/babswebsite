@@ -2,11 +2,11 @@ backend:
   name: github
   repo: liberalreporters/babatundeogunladewebsite
   branch: main
-  base_url: https://babatundeogunlade.com
+  base_url: https://babswebsite-preview.liberalreporters.workers.dev
   auth_endpoint: api/auth
 
-site_url: https://babatundeogunlade.com
-display_url: https://babatundeogunlade.com
+site_url: https://babswebsite-preview.liberalreporters.workers.dev
+display_url: https://babswebsite-preview.liberalreporters.workers.dev
 locale: en
 
 # Cloudinary stores the photographs; the CMS saves full HTTPS delivery URLs.

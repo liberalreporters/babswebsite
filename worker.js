@@ -5,6 +5,7 @@ function securityHeaders(extra = {}) {
     "Cache-Control": "no-store",
     "X-Content-Type-Options": "nosniff",
     "Referrer-Policy": "no-referrer",
+    "X-Robots-Tag": "noindex, nofollow",
     ...extra,
   };
 }
@@ -130,6 +131,9 @@ export default {
     if (url.pathname.startsWith("/api/")) {
       return new Response("Not found", { status: 404, headers: securityHeaders() });
     }
-    return env.ASSETS.fetch(request);
+    const assetResponse = await env.ASSETS.fetch(request);
+    const headers = new Headers(assetResponse.headers);
+    headers.set("X-Robots-Tag", "noindex, nofollow");
+    return new Response(assetResponse.body, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
   },
 };

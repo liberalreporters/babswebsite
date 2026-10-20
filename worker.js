@@ -131,7 +131,7 @@ export default {
     if (url.pathname.startsWith("/api/")) {
       return new Response("Not found", { status: 404, headers: securityHeaders() });
     }
-    const path = url.pathname === "/" ? "index.html" : url.pathname.replace(/^\\/+/, "");
+    const path = url.pathname === "/" ? "index.html" : url.pathname.replace(/^[/]+/, "");
     let decodedPath;
     try { decodedPath = decodeURIComponent(path); } catch { return new Response("Bad path", { status: 400 }); }
     if (decodedPath.split("/").some((part) => part === ".." || part === ".")) {

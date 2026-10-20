@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0A2540"/><stop offset="1" stop-color="#008751"/></linearGradient></defs>
+<rect width="1200" height="800" fill="#edf2f7"/><rect x="28" y="28" width="1144" height="744" rx="30" fill="url(#g)"/>
+<circle cx="600" cy="300" r="110" fill="#fff" fill-opacity=".12" stroke="#D4AF37" stroke-width="4"/>
+<path d="M420 560 Q600 370 780 560 L820 650 L380 650 Z" fill="#fff" fill-opacity=".15"/>
+<text x="600" y="100" font-family="Arial" font-size="20" font-weight="bold" letter-spacing="4" text-anchor="middle" fill="#D4AF37">PLACEHOLDER — REPLACE BEFORE PUBLISHING</text>
+<text x="600" y="700" font-family="Arial" font-size="38" font-weight="bold" text-anchor="middle" fill="#fff">OFFICIAL PORTRAIT</text>
+<text x="600" y="742" font-family="Arial" font-size="22" text-anchor="middle" fill="#fff">Replace with approved portrait</text></svg>

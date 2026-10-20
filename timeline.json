@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "items": [
+    {
+      "date": "YYYY or YYYY-MM",
+      "title": "Add a verified career or public-service milestone",
+      "description": "Use sourced, factual language.",
+      "category": "Career",
+      "source": "Add source/reference before publishing."
+    }
+  ],
+  "publishingNote": "Confirm all dates, roles and outcomes against reliable records."
+}

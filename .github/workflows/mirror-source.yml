@@ -1,5 +1,5 @@
 name: Mirror complete BABS website source
-# Source of truth: liberalreporters/babatundeogunladewebsite main. Keep staging CMS config and Worker files isolated.
+# Source of truth: liberalreporters/babatundeogunladewebsite main. Keep staging CMS config and Worker files isolated; mirror current source fixes.
 
 on:
   push:

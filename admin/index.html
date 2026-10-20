@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
-    <meta name="theme-color" content="#0b3d2e">
     <title>BABS Website Admin</title>
     <link rel="stylesheet" href="/admin/admin.css">
   </head>
@@ -19,120 +18,68 @@
           </div>
         </div>
 
-        <nav id="feed-nav" class="feed-nav" aria-label="Content sections"></nav>
+        <nav id="feed-nav" class="feed-nav"></nav>
 
-        <div class="sidebar-actions">
-          <button id="save-all" type="button" class="primary">Save changes</button>
-          <button id="export-json" type="button" class="secondary">Export JSON</button>
+        <div style="margin-top:20px;">
+          <button id="save-all" class="primary" type="button">Save changes</button>
+          <button id="export-json" class="small" type="button" style="margin-top:10px;">Export JSON</button>
         </div>
       </aside>
 
       <main class="content-panel">
         <header class="topbar">
           <div>
-            <p class="eyebrow">Content dashboard</p>
-            <h2 id="active-feed-title">Editing feed</h2>
+            <p style="margin:0 0 8px; color:#66776a; text-transform:uppercase; letter-spacing:0.12em; font-size:12px;">Content dashboard</p>
+            <h2 id="active-feed-title" style="margin:0;">Editing feed</h2>
           </div>
           <a class="preview-link" href="/" target="_blank" rel="noopener noreferrer">Open site</a>
         </header>
 
-        <div class="notice" id="status-box" role="status" aria-live="polite">
-          Content is saved in this browser. Public pages refresh from the browser's local data while you are editing.
-        </div>
+        <div id="status-box" class="notice" role="status">Content is saved in this browser.</div>
 
         <section class="meta-block">
-          <div class="field-row">
-            <label>
-              <span>Publishing note</span>
-              <textarea id="publishing-note" rows="3" placeholder="Editorial guidance for this feed..."></textarea>
-            </label>
-          </div>
+          <label>
+            <span>Publishing note</span>
+            <textarea id="publishing-note" rows="3"></textarea>
+          </label>
         </section>
 
         <section class="items-panel">
           <div class="section-head">
             <h3>Entries</h3>
-            <button id="add-item" type="button" class="small">Add entry</button>
+            <button id="add-item" class="small" type="button">Add entry</button>
           </div>
-          <div id="items-container" class="items-container"></div>
+          <div id="items-container"></div>
         </section>
       </main>
     </div>
 
     <template id="item-template">
       <article class="item-card">
-        <div class="card-header">
+        <div class="card-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
           <span class="item-index">Entry</span>
-          <button type="button" class="delete-item small danger">Remove</button>
+          <button type="button" class="small danger delete-item">Remove</button>
         </div>
 
         <div class="field-grid">
-          <label>
-            <span>ID / slug</span>
-            <input type="text" data-field="id" placeholder="example-article">
-          </label>
-          <label>
-            <span>Title</span>
-            <input type="text" data-field="title" placeholder="Headline or title">
-          </label>
-          <label>
-            <span>Date</span>
-            <input type="date" data-field="date">
-          </label>
-          <label>
-            <span>Category</span>
-            <input type="text" data-field="category" placeholder="News, Event, Photo...">
-          </label>
-          <label>
-            <span>Status</span>
-            <select data-field="status">
-              <option value="draft">Draft</option>
-              <option value="published">Published</option>
-            </select>
-          </label>
-          <label>
-            <span>Location</span>
-            <input type="text" data-field="location" placeholder="Eruwa, Oyo State">
-          </label>
-          <label>
-            <span>Image URL</span>
-            <input type="url" data-field="image" placeholder="https://...">
-          </label>
-          <label>
-            <span>Alt text</span>
-            <input type="text" data-field="alt" placeholder="Describe the image">
-          </label>
-          <label>
-            <span>Author</span>
-            <input type="text" data-field="author" placeholder="Author or office">
-          </label>
-          <label>
-            <span>Source</span>
-            <input type="text" data-field="source" placeholder="Source or verification note">
-          </label>
-          <label>
-            <span>URL</span>
-            <input type="url" data-field="url" placeholder="https://..."></input>
-          </label>
-          <label>
-            <span>Credit</span>
-            <input type="text" data-field="credit" placeholder="Photographer or credit">
-          </label>
+          <label><span>ID / slug</span><input type="text" data-field="id"></label>
+          <label><span>Title</span><input type="text" data-field="title"></label>
+          <label><span>Date</span><input type="date" data-field="date"></label>
+          <label><span>Category</span><input type="text" data-field="category"></label>
+          <label><span>Status</span><select data-field="status"><option value="draft">Draft</option><option value="published">Published</option></select></label>
+          <label><span>Location</span><input type="text" data-field="location"></label>
+          <label><span>Image URL</span><input type="url" data-field="image"></label>
+          <label><span>Alt text</span><input type="text" data-field="alt"></label>
+          <label><span>Author</span><input type="text" data-field="author"></label>
+          <label><span>Source</span><input type="text" data-field="source"></label>
+          <label><span>URL</span><input type="url" data-field="url"></label>
+          <label><span>Credit</span><input type="text" data-field="credit"></label>
         </div>
 
-        <div class="rich-fields">
-          <label>
-            <span>Summary</span>
-            <textarea data-field="summary" rows="3" placeholder="Short description"></textarea>
-          </label>
-          <label>
-            <span>Body</span>
-            <textarea data-field="body" rows="5" placeholder="Full content for the item"></textarea>
-          </label>
-          <label>
-            <span>Caption</span>
-            <textarea data-field="caption" rows="3" placeholder="Caption for gallery items"></textarea>
-          </label>
+        <div style="margin-top:12px; display:grid; gap:10px;">
+          <label><span>Summary</span><textarea data-field="summary" rows="3"></textarea></label>
+          <label><span>Body</span><textarea data-field="body" rows="5"></textarea></label>
+          <label><span>Caption</span><textarea data-field="caption" rows="3"></textarea></label>
         </div>
 
         <div class="image-upload-wrap">

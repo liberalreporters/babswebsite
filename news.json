@@ -2,17 +2,30 @@
   "schemaVersion": 1,
   "items": [
     {
-      "id": "news-community-support-initiative",
-      "title": "Campaign Team Launches Community Support Initiative",
+      "id": "news-grassroots-engagement",
+      "title": "Ogunlade Assures Ibarapa East Residents of Inclusive Representation and Empowerment at Grand Finale of Ward Tour",
       "date": "2026-10-20",
       "category": "News",
-      "summary": "The initiative is designed to support families, strengthen local welfare structures, and improve grassroots access to essential services.",
-      "image": "https://images.example.com/news/community-support.jpg",
-      "imageAlt": "Residents and volunteers during a community support outreach",
+      "summary": "Hon. Babatunde Sunday Ogunlade concluded his ward tour with a message of inclusive representation, empowerment, and direct community engagement for residents across Ibarapa East.",
+      "image": "/FB_IMG_1791776857340.jpg",
+      "imageAlt": "Hon. Babatunde Sunday Ogunlade addressing constituents during the ward tour finale",
       "author": "Media Team",
       "status": "published",
       "url": "https://babatundeogunlade.com",
       "source": "Official media desk"
+    },
+    {
+      "id": "news-pbat-walk-allisoji-2027",
+      "title": "Hon. Babatunde Sunday Ogunlade Joins Oyo APC House of Assembly Candidates for PBAT Walk with AlliSoji 2027",
+      "date": "2026-10-17",
+      "category": "Campaign News",
+      "summary": "The APC candidate joined fellow House of Assembly candidates for the PBAT Walk with AlliSoji 2027, reinforcing unity, peace, and a strong 2027 campaign message.",
+      "image": "/IMG-20261001-WA0018.jpg",
+      "imageAlt": "APC House of Assembly candidates participating in the PBAT Walk with AlliSoji 2027 rally",
+      "author": "Media Team",
+      "status": "published",
+      "url": "https://babatundeogunlade.com",
+      "source": "Official campaign media"
     }
   ],
   "publishingNote": "Add only approved news items. Keep drafts out of the public site."

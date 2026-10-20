@@ -56,10 +56,14 @@ async function authStart(request, env) {
     scope: "public_repo",
     state,
   });
-  return Response.redirect("https://github.com/login/oauth/authorize?" + query.toString(), 302, {
-    "Set-Cookie": `${COOKIE_NAME}=${state}; HttpOnly; Secure; SameSite=Lax; Path=/api; Max-Age=600`,
-    "Cache-Control": "no-store",
-    "Referrer-Policy": "no-referrer",
+  return new Response(null, {
+    status: 302,
+    headers: {
+      Location: "https://github.com/login/oauth/authorize?" + query.toString(),
+      "Set-Cookie": `${COOKIE_NAME}=${state}; HttpOnly; Secure; SameSite=Lax; Path=/api; Max-Age=600`,
+      "Cache-Control": "no-store",
+      "Referrer-Policy": "no-referrer",
+    },
   });
 }
 

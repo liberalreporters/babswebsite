@@ -28,7 +28,11 @@ jobs:
           rsync -a --delete \
             --exclude='.git/' \
             --exclude='.github/' \
-            --exclude='CLOUDFLARE-MIGRATION.md' \
+            --exclude='CLOUDFLARE-MIGRATION.md' \\
+            --exclude='CLOUDFLARE-WORKER-SETUP.md' \\
+            --exclude='wrangler.jsonc' \\
+            --exclude='worker.js' \\
+            --exclude='.dev.vars.example' \\
             /tmp/babs-source/ ./
 
       - name: Commit mirrored source files

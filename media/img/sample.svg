@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
-  <rect width="800" height="600" fill="#2a7ae2" rx="20"/>
-  <g fill="#fff" font-family="Arial, Helvetica, sans-serif">
-    <text x="50%" y="45%" font-size="40" text-anchor="middle" font-weight="700">Babatunde Ogunlade</text>
-    <text x="50%" y="55%" font-size="20" text-anchor="middle">Ibarapa East Constituency</text>
-  </g>
-</svg>

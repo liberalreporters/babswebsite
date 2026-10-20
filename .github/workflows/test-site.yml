@@ -1,0 +1,23 @@
+name: Validate BABS static site
+
+on:
+  push:
+    branches: [cloudflare-prep]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref || github.ref_name }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run site structure and feed checks
+        run: python tests/check_site.py

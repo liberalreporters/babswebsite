@@ -31,6 +31,7 @@ jobs:
             --exclude='.git/' \
             --exclude='.github/' \
             --exclude='CLOUDFLARE-MIGRATION.md' \
+            --exclude='admin/config.yml' \
             --exclude='CLOUDFLARE-WORKER-SETUP.md' \
             --exclude='wrangler.jsonc' \
             --exclude='worker.js' \

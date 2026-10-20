@@ -1,1 +1,0 @@
-Staging source mirror trigger. This file is temporary and is removed by the source mirror workflow.

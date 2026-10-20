@@ -39,6 +39,10 @@ jobs:
             --exclude='.dev.vars.example' \
             /tmp/babs-source/ ./
 
+      - name: Validate mirrored website before committing
+        run: |
+          python -m unittest tests/check_site.py -v
+
       - name: Commit mirrored source files
         run: |
           git config user.name "github-actions[bot]"

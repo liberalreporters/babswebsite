@@ -134,6 +134,7 @@ export default {
     const path = url.pathname === "/" ? "index.html" : url.pathname.replace(/^[/]+/, "");
     let decodedPath;
     try { decodedPath = decodeURIComponent(path); } catch { return new Response("Bad path", { status: 400 }); }
+    if (decodedPath.endsWith("/")) decodedPath += "index.html";
     if (decodedPath.split("/").some((part) => part === ".." || part === ".")) {
       return new Response("Bad path", { status: 400 });
     }

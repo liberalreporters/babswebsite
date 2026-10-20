@@ -1,15 +1,150 @@
 <!doctype html>
 <html lang="en-NG">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#082b24">
-  <title>BABS Website Content Manager</title>
-  <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url">
-</head>
-<body>
-  <div id="nc-root"></div>
-  <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.8.3/dist/decap-cms.js"></script>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#0b3d2e">
+    <title>BABS Website Admin</title>
+    <link rel="stylesheet" href="/admin/admin.css">
+  </head>
+  <body>
+    <div class="admin-shell">
+      <aside class="sidebar">
+        <div class="brand-block">
+          <div class="brand-mark">BABS</div>
+          <div>
+            <h1>Website Admin</h1>
+            <p>Content manager</p>
+          </div>
+        </div>
+
+        <nav id="feed-nav" class="feed-nav" aria-label="Content sections"></nav>
+
+        <div class="sidebar-actions">
+          <button id="save-all" type="button" class="primary">Save changes</button>
+          <button id="export-json" type="button" class="secondary">Export JSON</button>
+        </div>
+      </aside>
+
+      <main class="content-panel">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Content dashboard</p>
+            <h2 id="active-feed-title">Editing feed</h2>
+          </div>
+          <a class="preview-link" href="/" target="_blank" rel="noopener noreferrer">Open site</a>
+        </header>
+
+        <div class="notice" id="status-box" role="status" aria-live="polite">
+          Content is saved in this browser. Public pages refresh from the browser's local data while you are editing.
+        </div>
+
+        <section class="meta-block">
+          <div class="field-row">
+            <label>
+              <span>Publishing note</span>
+              <textarea id="publishing-note" rows="3" placeholder="Editorial guidance for this feed..."></textarea>
+            </label>
+          </div>
+        </section>
+
+        <section class="items-panel">
+          <div class="section-head">
+            <h3>Entries</h3>
+            <button id="add-item" type="button" class="small">Add entry</button>
+          </div>
+          <div id="items-container" class="items-container"></div>
+        </section>
+      </main>
+    </div>
+
+    <template id="item-template">
+      <article class="item-card">
+        <div class="card-header">
+          <span class="item-index">Entry</span>
+          <button type="button" class="delete-item small danger">Remove</button>
+        </div>
+
+        <div class="field-grid">
+          <label>
+            <span>ID / slug</span>
+            <input type="text" data-field="id" placeholder="example-article">
+          </label>
+          <label>
+            <span>Title</span>
+            <input type="text" data-field="title" placeholder="Headline or title">
+          </label>
+          <label>
+            <span>Date</span>
+            <input type="date" data-field="date">
+          </label>
+          <label>
+            <span>Category</span>
+            <input type="text" data-field="category" placeholder="News, Event, Photo...">
+          </label>
+          <label>
+            <span>Status</span>
+            <select data-field="status">
+              <option value="draft">Draft</option>
+              <option value="published">Published</option>
+            </select>
+          </label>
+          <label>
+            <span>Location</span>
+            <input type="text" data-field="location" placeholder="Eruwa, Oyo State">
+          </label>
+          <label>
+            <span>Image URL</span>
+            <input type="url" data-field="image" placeholder="https://...">
+          </label>
+          <label>
+            <span>Alt text</span>
+            <input type="text" data-field="alt" placeholder="Describe the image">
+          </label>
+          <label>
+            <span>Author</span>
+            <input type="text" data-field="author" placeholder="Author or office">
+          </label>
+          <label>
+            <span>Source</span>
+            <input type="text" data-field="source" placeholder="Source or verification note">
+          </label>
+          <label>
+            <span>URL</span>
+            <input type="url" data-field="url" placeholder="https://..."></input>
+          </label>
+          <label>
+            <span>Credit</span>
+            <input type="text" data-field="credit" placeholder="Photographer or credit">
+          </label>
+        </div>
+
+        <div class="rich-fields">
+          <label>
+            <span>Summary</span>
+            <textarea data-field="summary" rows="3" placeholder="Short description"></textarea>
+          </label>
+          <label>
+            <span>Body</span>
+            <textarea data-field="body" rows="5" placeholder="Full content for the item"></textarea>
+          </label>
+          <label>
+            <span>Caption</span>
+            <textarea data-field="caption" rows="3" placeholder="Caption for gallery items"></textarea>
+          </label>
+        </div>
+
+        <div class="image-upload-wrap">
+          <label class="upload-box">
+            <span>Upload image</span>
+            <input type="file" accept="image/*" class="image-upload" />
+          </label>
+          <div class="image-preview"></div>
+        </div>
+      </article>
+    </template>
+
+    <script src="/admin/admin.js"></script>
+  </body>
 </html>

@@ -2,48 +2,6 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
-  "rewrites": [
-    {
-      "source": "/about",
-      "destination": "/about.html"
-    },
-    {
-      "source": "/profile",
-      "destination": "/profile.html"
-    },
-    {
-      "source": "/priorities",
-      "destination": "/priorities.html"
-    },
-    {
-      "source": "/press-centre",
-      "destination": "/press-centre/index.html"
-    },
-    {
-      "source": "/press-centre/:slug",
-      "destination": "/press-centre/article.html?slug=:slug"
-    },
-    {
-      "source": "/announcements",
-      "destination": "/announcements/index.html"
-    },
-    {
-      "source": "/news",
-      "destination": "/news/index.html"
-    },
-    {
-      "source": "/gallery",
-      "destination": "/gallery/index.html"
-    },
-    {
-      "source": "/contact",
-      "destination": "/contact.html"
-    },
-    {
-      "source": "/privacy",
-      "destination": "/privacy.html"
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",

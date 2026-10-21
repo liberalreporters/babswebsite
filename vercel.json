@@ -1,12 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://babatundeogunlade.com/</loc></url>
-  <url><loc>https://babatundeogunlade.com/about</loc></url>
-  <url><loc>https://babatundeogunlade.com/profile</loc></url>
-  <url><loc>https://babatundeogunlade.com/priorities</loc></url>
-  <url><loc>https://babatundeogunlade.com/press-centre</loc></url>
-  <url><loc>https://babatundeogunlade.com/news</loc></url>
-  <url><loc>https://babatundeogunlade.com/gallery</loc></url>
-  <url><loc>https://babatundeogunlade.com/contact</loc></url>
-  <url><loc>https://babatundeogunlade.com/privacy</loc></url>
-</urlset>
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
+}

@@ -1,18 +1,5 @@
-(() => {
-  'use strict';
-
-  document.querySelectorAll('[data-current-year]').forEach(node => {
-    node.textContent = String(new Date().getFullYear());
-  });
-
-  document.querySelectorAll('[data-menu-toggle]').forEach(button => {
-    const target = document.getElementById(button.getAttribute('aria-controls'));
-    if (!target) return;
-
-    button.addEventListener('click', () => {
-      const expanded = button.getAttribute('aria-expanded') === 'true';
-      button.setAttribute('aria-expanded', String(!expanded));
-      target.hidden = expanded;
-    });
-  });
-})();
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Sitemap: https://babatundeogunlade.com/sitemap.xml

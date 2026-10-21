@@ -26,6 +26,58 @@
       "status": "published",
       "url": "https://babatundeogunlade.com",
       "source": "Official campaign media"
+    },
+    {
+      "id": "news-teachers-day-2026",
+      "title": "BABS Media Pays Tribute to Teachers on World Teachers’ Day",
+      "date": "2026-10-05",
+      "category": "Community",
+      "summary": "The message recognised teachers and education personnel across Ibarapa East for their contributions to learning, mentorship and community development.",
+      "image": "/IMG-20261001-WA0018.jpg",
+      "imageAlt": "BABS Media public message artwork",
+      "author": "BABS Media",
+      "status": "published",
+      "url": "/press-centre",
+      "source": "Official media desk"
+    },
+    {
+      "id": "news-independence-2026",
+      "title": "BABS Media Issues Independence Day Message for Nigeria’s 66th Anniversary",
+      "date": "2026-10-01",
+      "category": "Statement",
+      "summary": "The statement extended goodwill to Nigerians and called for peace, unity, responsible leadership and community progress.",
+      "image": "/IMG-20261001-WA0018.jpg",
+      "imageAlt": "Public message for Nigeria’s Independence Anniversary",
+      "author": "BABS Media",
+      "status": "published",
+      "url": "/press-centre",
+      "source": "Official media desk"
+    },
+    {
+      "id": "news-apc-leaders-prayers",
+      "title": "Ibarapa East APC Leaders Offer Prayers Following Ogunlade’s Receipt of INEC Nomination Form",
+      "date": "2026-07-15",
+      "category": "Political update",
+      "summary": "A submitted report says APC leaders and stakeholders met with Ogunlade following his receipt of an INEC nomination form and offered encouragement ahead of the 2027 election.",
+      "image": "/FB_IMG_1791776326350.jpg",
+      "imageAlt": "Political stakeholders at an engagement",
+      "author": "Media desk",
+      "status": "published",
+      "url": "/press-centre",
+      "source": "Submitted report; details attributed to the source"
+    },
+    {
+      "id": "news-senator-alli-congratulations",
+      "title": "Ogunlade Congratulates Senator Sharafadeen Abiodun Alli on APC Governorship Nomination",
+      "date": "2026-07-02",
+      "category": "Statement",
+      "summary": "A congratulatory message attributed to Ogunlade welcomed Senator Alli’s emergence as the APC governorship flag bearer and expressed hopes for peaceful political engagement.",
+      "image": "/FB_IMG_1791776453322.jpg",
+      "imageAlt": "Political event image",
+      "author": "BABS Media",
+      "status": "published",
+      "url": "/press-centre",
+      "source": "Submitted statement"
     }
   ],
   "publishingNote": "Add only approved news items. Keep drafts out of the public site."

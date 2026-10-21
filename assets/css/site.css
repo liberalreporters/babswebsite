@@ -15,3 +15,6 @@
 .feature-card ul li+li{margin-top:.35rem}
 .page-subtitle{font-size:1.2rem;font-weight:750;color:var(--green-deep);margin-top:-.35rem}
 @media(max-width:680px){.media-card>img{aspect-ratio:16/10}.profile-figure{max-width:100%}.blueprint-note{padding:.85rem}}
+
+/* Ensure explicitly hidden navs can be restored by the accessible mobile toggle. */
+.site-nav[hidden]{display:flex!important}

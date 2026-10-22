@@ -4,94 +4,49 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
-    <title>BABS Website Admin</title>
-    <link rel="stylesheet" href="/admin/admin.css">
+    <meta name="theme-color" content="#0b2d26">
+    <title>BABS Content Manager</title>
+    <meta name="description" content="Secure content management for the Babatunde Ogunlade public information website.">
+    <style>
+      :root{color-scheme:light;--green:#0b5b43;--navy:#102b24;--gold:#d4af37;--ink:#17251f;--muted:#617168;--line:#dce6df;--bg:#f4f7f5}
+      *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}
+      .top{background:linear-gradient(120deg,#0b2d26,#145b43);color:#fff;padding:22px clamp(18px,4vw,48px);display:flex;align-items:center;gap:14px}
+      .mark{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:#ffffff18;border:1px solid #ffffff35;font-weight:900;letter-spacing:.04em}
+      .brand h1{font-size:clamp(18px,2.5vw,25px);margin:0 0 4px}.brand p{margin:0;color:#d7e8df;font-size:13px}
+      .top a{margin-left:auto;color:#fff;text-decoration:none;border:1px solid #ffffff55;border-radius:999px;padding:10px 14px;font-size:14px;font-weight:700}
+      main{max-width:1180px;margin:0 auto;padding:26px clamp(14px,3vw,32px) 48px}
+      .intro{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:20px}.intro h2{font-size:clamp(23px,3vw,32px);margin:0 0 8px}.intro p{margin:0;color:var(--muted);line-height:1.65;max-width:720px}
+      .status{flex-shrink:0;background:#fff6d9;border:1px solid #efdf9f;color:#6b5510;border-radius:12px;padding:10px 13px;font-size:12px;font-weight:800}
+      .guide{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin:0 0 20px;box-shadow:0 6px 18px #102b2408}
+      .guide h3{margin:0 0 8px;font-size:16px}.guide p{margin:0;color:var(--muted);font-size:14px;line-height:1.6}.guide strong{color:var(--ink)}
+      .cms-frame{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;min-height:68vh;box-shadow:0 10px 28px #102b2410}
+      #nc-root{min-height:68vh}
+      .loading{padding:28px;color:var(--muted);text-align:center}
+      .footer{margin-top:16px;color:var(--muted);font-size:12px;line-height:1.6}
+      @media(max-width:650px){.top{padding:16px;align-items:flex-start}.top a{font-size:12px;padding:9px}.intro{display:block}.status{display:inline-block;margin-top:14px}.guide{padding:15px}}
+    </style>
+    <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url">
   </head>
   <body>
-    <div class="admin-shell">
-      <aside class="sidebar">
-        <div class="brand-block">
-          <div class="brand-mark">BABS</div>
-          <div>
-            <h1>Website Admin</h1>
-            <p>Content manager</p>
-          </div>
-        </div>
-
-        <nav id="feed-nav" class="feed-nav"></nav>
-
-        <div style="margin-top:20px;">
-          <button id="save-all" class="primary" type="button">Save changes</button>
-          <button id="export-json" class="small" type="button" style="margin-top:10px;">Export JSON</button>
-        </div>
-      </aside>
-
-      <main class="content-panel">
-        <header class="topbar">
-          <div>
-            <p style="margin:0 0 8px; color:#66776a; text-transform:uppercase; letter-spacing:0.12em; font-size:12px;">Content dashboard</p>
-            <h2 id="active-feed-title" style="margin:0;">Editing feed</h2>
-          </div>
-          <a class="preview-link" href="/" target="_blank" rel="noopener noreferrer">Open site</a>
-        </header>
-
-        <div id="status-box" class="notice" role="status">Content is saved in this browser.</div>
-
-        <section class="meta-block">
-          <label>
-            <span>Publishing note</span>
-            <textarea id="publishing-note" rows="3"></textarea>
-          </label>
-        </section>
-
-        <section class="items-panel">
-          <div class="section-head">
-            <h3>Entries</h3>
-            <button id="add-item" class="small" type="button">Add entry</button>
-          </div>
-          <div id="items-container"></div>
-        </section>
-      </main>
-    </div>
-
-    <template id="item-template">
-      <article class="item-card">
-        <div class="card-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-          <span class="item-index">Entry</span>
-          <button type="button" class="small danger delete-item">Remove</button>
-        </div>
-
-        <div class="field-grid">
-          <label><span>ID / slug</span><input type="text" data-field="id"></label>
-          <label><span>Title</span><input type="text" data-field="title"></label>
-          <label><span>Date</span><input type="date" data-field="date"></label>
-          <label><span>Category</span><input type="text" data-field="category"></label>
-          <label><span>Status</span><select data-field="status"><option value="draft">Draft</option><option value="published">Published</option></select></label>
-          <label><span>Location</span><input type="text" data-field="location"></label>
-          <label><span>Image URL</span><input type="url" data-field="image"></label>
-          <label><span>Alt text</span><input type="text" data-field="alt"></label>
-          <label><span>Author</span><input type="text" data-field="author"></label>
-          <label><span>Source</span><input type="text" data-field="source"></label>
-          <label><span>URL</span><input type="url" data-field="url"></label>
-          <label><span>Credit</span><input type="text" data-field="credit"></label>
-        </div>
-
-        <div style="margin-top:12px; display:grid; gap:10px;">
-          <label><span>Summary</span><textarea data-field="summary" rows="3"></textarea></label>
-          <label><span>Body</span><textarea data-field="body" rows="5"></textarea></label>
-          <label><span>Caption</span><textarea data-field="caption" rows="3"></textarea></label>
-        </div>
-
-        <div class="image-upload-wrap">
-          <label class="upload-box">
-            <span>Upload image</span>
-            <input type="file" accept="image/*" class="image-upload" />
-          </label>
-          <div class="image-preview"></div>
-        </div>
-      </article>
-    </template>
-
-    <script src="/admin/admin.js"></script>
+    <header class="top">
+      <div class="mark" aria-hidden="true">BABS</div>
+      <div class="brand"><h1>Website Content Manager</h1><p>Hon. Babatunde Sunday Ogunlade · Official public information website</p></div>
+      <a href="/" target="_blank" rel="noopener noreferrer">View public website ↗</a>
+    </header>
+    <main>
+      <section class="intro">
+        <div><h2>Manage website content</h2><p>Create or edit press releases, announcements, news updates and gallery photographs. Use the image field to upload a file into the website repository; save your changes through the publishing controls when you are ready.</p></div>
+        <span class="status">Editor sign-in required</span>
+      </section>
+      <section class="guide" aria-labelledby="guide-title">
+        <h3 id="guide-title">Quick publishing guide</h3>
+        <p><strong>1.</strong> Sign in with the authorised GitHub account. <strong>2.</strong> Choose a section from the left menu and select an existing item or create a new one. <strong>3.</strong> Add a clear title, correct date, short summary and source. <strong>4.</strong> Upload a photograph and write descriptive alt text. <strong>5.</strong> Keep the status as <strong>Draft</strong> until reviewed; set it to <strong>Published</strong> only after approval, then save/publish. Public pages display published items only.</p>
+      </section>
+      <section class="cms-frame" aria-label="Content editor">
+        <div id="nc-root"><p class="loading">Loading the content editor… If this message remains, refresh the page or check the connection.</p></div>
+      </section>
+      <p class="footer">Images and content are stored in the connected GitHub repository. Publishing requires the website's GitHub OAuth integration to be configured in Vercel. Never enter passwords, access tokens or secret keys into content fields.</p>
+    </main>
+    <script src="https://unpkg.com/decap-cms@^3.1.2/dist/decap-cms.js"></script>
   </body>
 </html>

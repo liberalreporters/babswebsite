@@ -1,13 +1,17 @@
 backend:
   name: github
-  repo: liberalreporters/babatundeogunladewebsite
+  repo: liberalreporters/babswebsite
   branch: main
-  base_url: https://babswebsite-preview.liberalreporters.workers.dev
+  base_url: https://babatundeogunlade.com
   auth_endpoint: api/auth
 
-site_url: https://babswebsite-preview.liberalreporters.workers.dev
-display_url: https://babswebsite-preview.liberalreporters.workers.dev
+site_url: https://babatundeogunlade.com
+display_url: https://babatundeogunlade.com
 locale: en
+
+# Keep publishing straightforward: drafts remain drafts until the editor explicitly changes status.
+# GitHub OAuth must be configured in Vercel for sign-in and repository writes to work.
+
 
 # Images are stored directly in the GitHub content repository. This avoids a paid external media service.
 # Fallback repository uploads.

@@ -4,7 +4,7 @@
   const filter = document.querySelector("[data-filter]");
   const cardsRoot = document.querySelector(".cards");
   const empty = document.querySelector("[data-empty]");
-  const path = window.location.pathname.replace(/\\/+$/, "").replace(/\\.html$/i, "");
+  const path = window.location.pathname.replace(/\/+$/, "").replace(/\.html$/i, "");
   const page = path.split("/").pop() || "home";
   const feeds = {
     gallery: { file: "/gallery.json", title: "No approved photographs are published yet.", mode: "gallery" },
@@ -13,7 +13,7 @@
     news: { file: "/news.json", title: "There are no approved news items published yet.", mode: "published" }
   };
   function txt(value) { return typeof value === "string" ? value.trim() : ""; }
-  function validDate(value) { return /^\\d{4}-\\d{2}-\\d{2}$/.test(txt(value)) && !txt(value).startsWith("YYYY"); }
+  function validDate(value) { return /^\d{4}-\d{2}-\d{2}$/.test(txt(value)) && !txt(value).startsWith("YYYY"); }
   function safeUrl(value) {
     const url = txt(value);
     if (url.startsWith("/") && !url.startsWith("//")) return url;

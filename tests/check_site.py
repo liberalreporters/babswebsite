@@ -40,6 +40,29 @@ class SiteTests(unittest.TestCase):
         self.assertIn("https://babatundeogunlade.com", sitemap)
         self.assertNotIn("https://www.babatundeogunlade.com", sitemap)
 
+    def test_interactive_pages_and_accessibility(self):
+        news = (ROOT / "news.html").read_text()
+        press = (ROOT / "press-centre/index.html").read_text()
+        announcements = (ROOT / "announcements/index.html").read_text()
+        article = (ROOT / "press-centre/article.html").read_text()
+        gallery = (ROOT / "gallery/index.html").read_text()
+        contact = (ROOT / "contact.html").read_text()
+        js = (ROOT / "assets/js/site.js").read_text()
+        css = (ROOT / "assets/css/site.css").read_text()
+        self.assertIn('data-feed-url="/news.json"', news)
+        self.assertIn('data-feed-url="/press-centre.json"', press)
+        self.assertIn('data-feed-url="/announcements.json"', announcements)
+        self.assertIn('data-article-title', article)
+        self.assertIn('<title>Photo Gallery | Babatunde Sunday Ogunlade</title>', gallery)
+        self.assertIn('aria-current="page">Photo Gallery', gallery)
+        self.assertIn('data-mailto-form', contact)
+        self.assertNotIn('data-demo-form', contact)
+        self.assertIn('prefers-reduced-motion', css)
+        self.assertIn(':focus-visible', css)
+        self.assertIn('aria-expanded', js)
+        self.assertIn('data-feed', js)
+        self.assertIn('reportValidity', js)
+
     def test_local_links(self):
         for page in ROOT.rglob("*.html"):
             for url in re.findall(r'(?:href|src)="(/[^"#?]+)', page.read_text()):

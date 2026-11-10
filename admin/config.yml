@@ -1,7 +1,7 @@
 backend:
   name: github
   repo: liberalreporters/babatundeogunladewebsite
-  branch: main
+  branch: cms-cloudflare-preview
   base_url: https://babswebsite-preview.liberalreporters.workers.dev
   auth_endpoint: api/auth
 

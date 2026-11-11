@@ -1,34 +1,52 @@
 # Cloudflare migration plan — BABS website
 
-This branch is a staging area only. It is not connected to the production domain and must not be merged into `main` until the complete website and CMS have been tested.
-
-## Sources of truth
-- Website and content: https://github.com/liberalreporters/babatundeogunladewebsite (branch `main`)
-- Cloudflare staging repository: https://github.com/liberalreporters/babswebsite (branch `cloudflare-prep`)
+## Environment
+- Repository: https://github.com/liberalreporters/babswebsite
+- Staging branch: `cms-cloudflare-preview`
+- Preview Worker: `babswebsite-preview`
+- Preview URL: https://babswebsite-preview.liberalreporters.workers.dev
+- CMS URL: https://babswebsite-preview.liberalreporters.workers.dev/admin/
 - Production domain: https://babatundeogunlade.com
 
-## Important architecture finding
-The source website uses Decap CMS with the GitHub backend. It does not use Supabase. The existing `api/auth.js` and `api/callback.js` are Vercel-style Node serverless functions and cannot simply be deployed unchanged as Cloudflare Worker handlers. A Cloudflare-native OAuth handler must be implemented and tested before the CMS can authenticate.
+## Staging implementation
+The staging branch contains a static multi-page website, Decap CMS configuration, GitHub content backend, Worker OAuth handler, four JSON feeds and validation tests.
 
-The Supabase project `hgcwhzyyhnntbdipvqnp` currently has no schema and is not used by this source website. Do not put service-role keys or other secrets in client-side files.
+The CMS writes to `liberalreporters/babswebsite` on `cms-cloudflare-preview`. Existing content from the repository's main branch has been copied into the four staging feeds with every item set to `draft`. The public feeds display only items whose status is `published`.
 
-## Safe migration sequence
-1. Preserve the production website, DNS records, and existing Worker unchanged.
-2. Copy the complete source tree, including every HTML page, CSS/JS file, JSON feed, image, test, and CMS configuration from the source repository. Do not copy only `index.html`; its asset paths and content feeds are required.
-3. Configure Decap CMS to write to the intended repository and branch, and implement Cloudflare-compatible GitHub OAuth routes using Worker secrets (never commit OAuth secrets).
-4. Configure Cloudflare's Git integration or Worker static assets and deploy only to a preview URL.
-5. Test the home page, every internal page, assets, JSON feeds, `/admin/`, OAuth login, and a controlled draft/publish cycle.
-6. Only after all tests pass, plan a separate, explicitly approved production cutover. DNS and the existing production Worker must not be changed as part of staging.
+The Cloudflare preview Worker has the encrypted secret bindings `GITHUB_OAUTH_CLIENT_ID` and `GITHUB_OAUTH_CLIENT_SECRET`. Their values are never read or displayed by this workflow. The expected GitHub OAuth callback URL is:
 
-## Acceptance checklist
-- [ ] Complete source tree copied; no missing assets or pages
-- [ ] Preview website loads on desktop and mobile
-- [ ] No broken internal links, CSS, JavaScript, or content feeds
-- [ ] CMS loads at `/admin/`
-- [ ] GitHub OAuth succeeds without exposing credentials
-- [ ] CMS writes only to the intended repository/branch
-- [ ] Drafts remain unpublished; publishing updates the public feed
-- [ ] Production DNS and live site remain unchanged until cutover approval
+`https://babswebsite-preview.liberalreporters.workers.dev/api/callback`
 
-## Current status
-The `cloudflare-prep` branch was created from the existing placeholder repository. No production DNS changes, Worker deployments, Supabase schema changes, or production commits were made by this staging step.
+## Verified work
+- CMS config points to the preview Worker and staging GitHub branch.
+- Content migration: 11 press items, 6 news items, 10 announcements and 5 gallery entries; all drafts.
+- News & Updates page added and linked in the primary navigation.
+- Worker source updated with clean-URL resolution for directory index and `.html` pages, plus a `/profile` alias.
+- Feed date parsing corrected and drafts excluded from all public feeds, including gallery.
+- GitHub Actions validation on `cms-cloudflare-preview` passed for commit `0e4fab136f2a88d541f5fa321d3b22e8150be24f`.
+
+## Critical Cloudflare routing finding — do not ignore
+The Cloudflare zone's live Worker route list currently reports:
+
+`*.babatundeogunlade.com/* → babswebsite-preview`
+
+The existing production Worker `babs07` is present, but that route is not currently listed as its active zone route. The preview Worker adds `X-Robots-Tag: noindex, nofollow` to every response. This means the preview Worker is attached to a production subdomain wildcard and may be serving preview content to subdomains such as `www`.
+
+Do not deploy the latest staging Worker code or perform a production cutover until this route is reviewed and the user explicitly approves restoring or changing production routing. The apex domain and www host must be tested separately before any DNS or route change.
+
+## Remaining validation
+1. Resolve the wildcard production route so staging is isolated to its `workers.dev` preview URL.
+2. Confirm the GitHub OAuth App callback URL exactly matches the preview callback above.
+3. Test browser-based CMS login and a disposable draft commit.
+4. Verify every clean URL, asset, JSON feed and 404 behaviour on the preview host.
+5. Organise Cloudinary assets and connect selected authorised media.
+6. Complete SEO/AEO audit when the analyzer is accessible.
+7. Obtain explicit approval before any production route, DNS, main-branch or deployment change.
+
+## DNS and email
+DNS Doctor ownership verification is pending. The required TXT challenge has not been published. The latest scan also found no SPF or DMARC record and no MX records; DKIM was not found among common selectors. Do not create SPF, MX or DKIM records until the actual email provider and legitimate sending services are confirmed. DMARC monitoring should be configured only after the domain owner approves the exact TXT record.
+
+## Protection rules
+- Keep all staging content as drafts until editorial review.
+- Never expose OAuth secrets or commit them to Git.
+- Do not alter production DNS, Worker routes, production OAuth apps or the `main` branch without explicit approval.

@@ -1,38 +1,40 @@
-# BABS CMS repair and deployment notes
+# BABS website CMS — GitHub-backed Decap CMS
 
-Live domain: https://babatundeogunlade.com  
-Connected website repository: https://github.com/liberalreporters/babatundeogunladewebsite  
-Admin: https://babatundeogunlade.com/admin/
+## Architecture
+The staging website uses Decap CMS with the GitHub backend. Content is stored in the liberalreporters/babswebsite repository on the cms-cloudflare-preview branch and published through JSON feeds consumed by the static website.
 
-## Changes
-- Pins Decap CMS to the absolute config path /admin/config.yml.
-- Adds same-domain Vercel GitHub OAuth endpoints under /api/.
-- Adds the Gallery collection and Cloudinary media-library settings.
-- Fixes CSS/JS references in Press, Announcements and Gallery: the previous HTML requested files under /assets/css and /assets/js, but those files are at repository root.
-- Connects the JSON feeds to public cards and hides draft/template records.
-- Adds a News page.
+**Supabase is not part of this implementation.** Do not create a Supabase project, add Supabase keys, or follow setup instructions for a different or older admin build.
 
-## Required setup before CMS login works
-1. In GitHub, go to Settings → Developer settings → OAuth Apps → New OAuth App.
-2. Homepage URL: https://babatundeogunlade.com
-3. Authorization callback URL: https://babatundeogunlade.com/api/callback
-4. In Vercel project babatundeogunladewebsite, add Production environment variables:
-   - GITHUB_OAUTH_CLIENT_ID — the OAuth App Client ID
-   - GITHUB_OAUTH_CLIENT_SECRET — the OAuth App Client Secret
-5. Redeploy after saving the variables.
-6. In Cloudinary, copy the Cloud name and API key. Replace YOUR_CLOUDINARY_CLOUD_NAME and YOUR_CLOUDINARY_API_KEY in admin/config.yml.
-7. Never place the Cloudinary API secret or GitHub OAuth client secret in GitHub files. CMS editors need push access to the content repository.
+## Staging addresses
+- Preview website: https://babswebsite-preview.liberalreporters.workers.dev
+- CMS dashboard: https://babswebsite-preview.liberalreporters.workers.dev/admin/
+- CMS configuration: https://babswebsite-preview.liberalreporters.workers.dev/admin/config.yml
+- OAuth start: https://babswebsite-preview.liberalreporters.workers.dev/api/auth
+- Expected OAuth callback for a dedicated preview OAuth app: https://babswebsite-preview.liberalreporters.workers.dev/api/callback
 
-The OAuth endpoint requests the public_repo scope for this public repository. It uses a short-lived Secure, HttpOnly, SameSite=Lax state cookie and validates state before exchanging the authorization code.
+## CMS collections
+The CMS manages Press Centre, News & Updates, Announcements and Photo Gallery. The public website displays only entries with status: published. Existing migrated entries are intentionally marked draft pending editorial review. Do not bulk-publish them.
 
-## Deployment warning
-Vercel reported the latest deployment as CANCELED with a link to its “verified commits” Git setting. A new commit may not deploy automatically until that setting or commit-verification issue is resolved. Check Vercel → project babatundeogunladewebsite → Settings → Git and the deployment details. Do not connect the domain to the empty babs2027 repository.
+## GitHub OAuth configuration
+The Cloudflare preview Worker reads encrypted Worker secrets named GITHUB_OAUTH_CLIENT_ID and GITHUB_OAUTH_CLIENT_SECRET. Never place the secret in this repository or expose it in logs.
 
-## Test checklist
-- /admin/config.yml displays YAML, not a 404.
-- /admin/ loads Decap CMS.
-- GitHub login returns through /api/callback.
-- Cloudinary media picker opens and saves HTTPS image URLs.
-- Gallery, press and announcements pages display only real, approved records.
-- Draft JSON records stay hidden.
-- Verify a Vercel deployment is Ready before relying on the changes.
+A GitHub OAuth App used for preview must have:
+- Homepage URL: https://babswebsite-preview.liberalreporters.workers.dev
+- Authorization callback URL: https://babswebsite-preview.liberalreporters.workers.dev/api/callback
+
+GitHub OAuth Apps use a configured callback URL. If the currently stored OAuth App was created for the production hostname, do not assume it can authenticate the preview hostname. Use a dedicated preview OAuth App and set its client ID and secret as preview Worker secrets, or deliberately configure a supported shared callback flow. Do not replace production secrets during staging work.
+
+Authorised editors also need write access to liberalreporters/babswebsite. The CMS requests the public_repo scope because the repository is public.
+
+## Troubleshooting
+1. Open /admin/config.yml on the preview hostname and confirm it returns YAML.
+2. Open /admin/ and confirm the Decap CMS interface loads.
+3. Confirm the CMS config points to liberalreporters/babswebsite, branch cms-cloudflare-preview, and the preview OAuth endpoint.
+4. Confirm the preview Worker has both OAuth secrets configured without revealing their values.
+5. Confirm the GitHub OAuth App callback URL matches the preview callback exactly.
+6. Sign in using an authorised GitHub account.
+7. Save a test draft and verify that the change appears only on the staging branch.
+8. Confirm public feeds continue to hide draft entries.
+
+## Production safety
+The production website and its OAuth configuration must remain separate from staging. Do not merge the staging branch into the production branch, change production Worker secrets, or publish unreviewed content without explicit approval.

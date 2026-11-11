@@ -160,6 +160,22 @@ export default {
     const headers = new Headers(upstream.headers);
     headers.set("Cache-Control", "no-store");
     headers.set("X-Robots-Tag", "noindex, nofollow");
+
+    // Inline the shared stylesheet into HTML responses. This avoids browser
+    // stylesheet-fetch failures on the GitHub-backed preview origin.
+    const isHtml = resolvedPath.toLowerCase().endsWith(".html");
+    if (isHtml) {
+      let html = await upstream.text();
+      const cssUrl = "https://raw.githubusercontent.com/liberalreporters/babswebsite/cms-cloudflare-preview/assets/css/site.css";
+      const cssResponse = await fetch(cssUrl, { headers: { Accept: "text/plain", "User-Agent": "BABS-Cloudflare-Preview" } });
+      if (cssResponse.ok) {
+        const css = await cssResponse.text();
+        const styleTag = "<style id=\"babs-site-styles\">" + css.replace(/<\\/style/gi, "<\\\\/style") + "</style>";
+        if (html.includes("</head>")) html = html.replace("</head>", styleTag + "</head>");
+      }
+      return new Response(html, { status: upstream.status, headers });
+    }
+
     const mime = {
       ".html": "text/html; charset=utf-8", ".css": "text/css; charset=utf-8",
       ".js": "text/javascript; charset=utf-8", ".json": "application/json; charset=utf-8",

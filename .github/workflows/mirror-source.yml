@@ -1,23 +1,17 @@
- \
-            --exclude='admin/config.yml' \
-            --exclude='CLOUDFLARE-WORKER-SETUP.md' \
-            --exclude='wrangler.jsonc' \
-            --exclude='worker.js' \
-            --exclude='.dev.vars.example' \
-            /tmp/babs-source/ ./
+name: Source mirror (paused for staging safety)
 
-      - name: Validate mirrored website before committing
-        run: |
-          python tests/check_site.py
+on:
+  workflow_dispatch:
 
-      - name: Commit mirrored source files
+permissions:
+  contents: read
+
+jobs:
+  notice:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Explain current publishing boundary
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          if git diff --cached --quiet; then
-            echo "Source already up to date."
-            exit 0
-          fi
-          git commit -m "chore: mirror authoritative BABS website source"
-          git push origin HEAD:cloudflare-prep
+          echo "Automatic source mirroring is paused while the CMS-backed staging site is being reviewed."
+          echo "No files are copied to production or to another branch by this workflow."
+          echo "Use the dedicated site validation workflow for staging checks."

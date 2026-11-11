@@ -1,6 +1,6 @@
 import json,pathlib,re,unittest
 ROOT=pathlib.Path(__file__).resolve().parents[1]
-REQUIRED=['index.html','about.html','priorities.html','press-centre/index.html','press-centre/article.html','announcements/index.html','gallery/index.html','contact.html','privacy.html','404.html']
+REQUIRED=['index.html','about.html','priorities.html','press-centre/index.html','press-centre/article.html','news/index.html','announcements/index.html','gallery/index.html','contact.html','privacy.html','404.html']
 class SiteTests(unittest.TestCase):
  def test_routes_and_metadata(self):
   for route in REQUIRED:
@@ -11,6 +11,10 @@ class SiteTests(unittest.TestCase):
    for item in data['items']:
     if item.get('status')=='published':
      self.assertTrue(item.get('title','').strip());self.assertRegex(item.get('date',''),r'^\d{4}-\d{2}-\d{2}$');self.assertNotRegex(item.get('title',''),r'DRAFT|replace-with|placeholder',re.I)
+ def test_feed_visibility_logic(self):
+  js=(ROOT/'assets/js/site.js').read_text()
+  self.assertIn(r'/^\\d{4}-\\d{2}-\\d{2}$/',js)
+  self.assertIn("x.status==='published'",js)
  def test_assets_and_domain(self):
   self.assertIn('.site-nav[hidden]{display:flex!important}',(ROOT/'assets/css/site.css').read_text())
   for f in ['assets/css/site.css','assets/js/site.js','sitemap.xml','robots.txt']:self.assertTrue((ROOT/f).exists())

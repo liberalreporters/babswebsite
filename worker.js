@@ -139,7 +139,7 @@ export default {
       return new Response("Bad path", { status: 400 });
     }
     const encodedPath = decodedPath.split("/").map(encodeURIComponent).join("/");
-    const upstreamUrl = "https://raw.githubusercontent.com/liberalreporters/babswebsite/cloudflare-prep/" + encodedPath;
+    const upstreamUrl = "https://raw.githubusercontent.com/liberalreporters/babswebsite/cms-cloudflare-preview/" + encodedPath;
     const upstream = await fetch(upstreamUrl, { headers: { Accept: "*/*", "User-Agent": "BABS-Cloudflare-Preview" } });
     if (!upstream.ok) {
       return new Response(upstream.status === 404 ? "Not found" : "Preview source unavailable", {

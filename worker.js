@@ -173,6 +173,7 @@ export default {
         const styleTag = "<style id=\"babs-site-styles\">" + css.replaceAll("</style", "<\\/style") + "</style>";
         if (html.includes("</head>")) html = html.replace("</head>", styleTag + "</head>");
       }
+      headers.set("Content-Type", "text/html; charset=utf-8");
       return new Response(html, { status: upstream.status, headers });
     }
 

@@ -29,7 +29,7 @@ function callbackPage(status, payload, origin) {
   const message = "authorization:github:" + status + ":" + JSON.stringify(payload);
   const messageLiteral = JSON.stringify(message).replace(/</g, "\\u003c");
   const originLiteral = JSON.stringify(origin);
-  const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CMS Authentication</title></head><body><p>Completing secure CMS sign-in. You may close this window if it does not close automatically.</p><script>(function(){'use strict';var message=${messageLiteral};var allowedOrigin=${originLiteral};var completed=false;function receive(event){if(completed||event.origin!==allowedOrigin||!window.opener)return;completed=true;window.removeEventListener('message',receive,false);window.opener.postMessage(message,allowedOrigin);window.close();}window.addEventListener('message',receive,false);if(window.opener)window.opener.postMessage('authorizing:github',allowedOrigin);})();</script></body></html>`;
+  const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CMS Authentication</title></head><body><p>Completing secure CMS sign-in. You may close this window if it does not close automatically.</p><script>(function(){'use strict';var message=${messageLiteral};var allowedOrigin=${originLiteral};if(window.opener){window.opener.postMessage(message,allowedOrigin);window.close();}})();</script></body></html>`;
   return new Response(html, {
     status: status === "success" ? 200 : 400,
     headers: securityHeaders({

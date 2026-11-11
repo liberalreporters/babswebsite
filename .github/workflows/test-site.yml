@@ -2,7 +2,7 @@ name: Validate BABS static site
 
 on:
   push:
-    branches: [cloudflare-prep]
+    branches: [cloudflare-prep, cms-cloudflare-preview]
   pull_request:
     branches: [main]
 

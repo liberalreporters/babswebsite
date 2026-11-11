@@ -22,7 +22,7 @@
   }
   function usable(item, mode) {
     if (!item || !txt(item.title) || !validDate(item.date)) return false;
-    if (mode === "published" && item.status !== "published") return false;
+    if (item.status !== "published") return false;
     if (mode === "gallery" && (!txt(item.image) || /replace-with|placeholder|event title/i.test(txt(item.image) + " " + txt(item.title)))) return false;
     return true;
   }

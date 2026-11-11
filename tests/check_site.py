@@ -13,7 +13,7 @@ class SiteTests(unittest.TestCase):
      self.assertTrue(item.get('title','').strip());self.assertRegex(item.get('date',''),r'^\d{4}-\d{2}-\d{2}$');self.assertNotRegex(item.get('title',''),r'DRAFT|replace-with|placeholder',re.I)
  def test_feed_visibility_logic(self):
   js=(ROOT/'assets/js/site.js').read_text()
-  self.assertIn(r'/^\\d{4}-\\d{2}-\\d{2}$/',js)
+  self.assertIn(r'/^\d{4}-\d{2}-\d{2}$/',js)
   self.assertIn("x.status==='published'",js)
  def test_assets_and_domain(self):
   self.assertIn('.site-nav[hidden]{display:flex!important}',(ROOT/'assets/css/site.css').read_text())

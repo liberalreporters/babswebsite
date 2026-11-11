@@ -1,37 +1,36 @@
-# Cloudflare Worker and Decap CMS setup (staging)
+# Cloudflare Worker and Decap CMS setup — staging
 
-**Preview URL:** https://babswebsite-preview.liberalreporters.workers.dev  
 **Worker:** `babswebsite-preview`  
-**CMS route:** `/admin/`  
-**OAuth callback:** `/api/callback`
+**Preview URL:** https://babswebsite-preview.liberalreporters.workers.dev  
+**CMS:** https://babswebsite-preview.liberalreporters.workers.dev/admin/  
+**GitHub repository:** `liberalreporters/babswebsite`  
+**Branch:** `cms-cloudflare-preview`  
+**OAuth callback:** https://babswebsite-preview.liberalreporters.workers.dev/api/callback
 
 ## Current implementation
-A separate Cloudflare Worker has been deployed for preview. It proxies static files from the public `cloudflare-prep` branch of this repository and adds `X-Robots-Tag: noindex, nofollow`. This is a temporary preview approach to avoid touching the production Worker or DNS while testing. It is not the recommended final production hosting path; production should use a proper Worker static-assets or Git-integrated build.
+The preview Worker serves the static site from the `cms-cloudflare-preview` branch and provides the GitHub OAuth endpoints used by Decap CMS. The CMS stores content in the same repository and branch. The four content feeds have been populated from the existing repository with all imported entries set to Draft.
 
-The preview CMS configuration writes to the authoritative source repository `liberalreporters/babatundeogunladewebsite`, branch `main`. The staging mirror workflow preserves the preview-specific `admin/config.yml`, Worker code, and Wrangler config.
-
-## Secrets still required for CMS login
-The Worker is deployed but **GitHub OAuth is not configured yet**. Add these as Worker secrets:
+The Worker has two encrypted secret bindings:
 - `GITHUB_OAUTH_CLIENT_ID`
 - `GITHUB_OAUTH_CLIENT_SECRET`
 
-Create a separate GitHub OAuth App for the preview environment. Set its Authorization callback URL to:
-`https://babswebsite-preview.liberalreporters.workers.dev/api/callback`
+Secret names and types were verified in Cloudflare. Secret values were not accessed. Confirm the GitHub OAuth App's Authorization callback URL is exactly the URL above.
 
-The existing production OAuth app should keep its production callback URL. A GitHub OAuth App has one configured callback URL, so reusing the production app for a different preview origin can break sign-in. Do not put either secret in Git or `admin/config.yml`.
+## Important routing warning
+The Cloudflare zone's current active route list assigns `*.babatundeogunlade.com/*` to `babswebsite-preview`. The preview Worker sets `X-Robots-Tag: noindex, nofollow` on all responses. This is a production-routing conflict, not a safe isolated preview arrangement.
 
-## Verify the preview
-1. Open the preview URL above.
-2. Open `/about.html`, `/priorities.html`, `/press-centre/`, `/announcements/`, and `/gallery/`.
-3. Open `/admin/`; confirm Decap CMS loads.
-4. After OAuth secrets and the separate app are configured, test GitHub login.
-5. Confirm the CMS can read the source repository.
-6. Test publishing with a disposable draft and confirm the expected source repository commit.
+Do not deploy updated staging Worker code, merge the branch, or change production DNS until the wildcard route has been explicitly reviewed and corrected with the user's approval. The existing `babs07` Worker is present, but it is not currently listed as the active route target in the zone route list.
 
-## Production protection
-Do not merge the draft pull request, switch production DNS, change the existing `babs07` Worker, or alter the production OAuth app as part of preview testing. Production cutover requires a separate explicit approval after preview validation.
+## Staging tests
+- GitHub Actions site validation passed on the staging branch.
+- Browser-based preview and CMS sign-in are not yet confirmed from this environment.
+- No test content has been published; imported content remains Draft.
+- No Cloudinary assets have been moved or deleted.
 
-## Limitations
-- The preview URL and Worker deployment exist, but the browser-level page test has not been verified from this environment.
-- OAuth login and CMS publishing are not yet tested because the preview Worker secrets and preview OAuth App are not configured.
-- The GitHub Actions site test is being used to identify and repair broken local links before the preview is considered validated.
+## Next steps
+1. Resolve the production wildcard route with explicit approval.
+2. Test the preview website and CMS in a browser.
+3. Complete a disposable draft-save test.
+4. Verify image uploads and publish only after editorial review.
+5. Complete SEO/AEO and accessibility checks.
+6. Plan production rollout separately and obtain explicit approval.

@@ -133,7 +133,7 @@ export default {
     }
     let decodedPath;
     try { decodedPath = decodeURIComponent(url.pathname); } catch { return new Response("Bad path", { status: 400, headers: securityHeaders() }); }
-    const cleanPath = decodedPath.replace(/\\/+$/, "").replace(/^\\/+/, "");
+    const cleanPath = decodedPath.replace(/\/+$/, "").replace(/^\/+/, "");
     if (cleanPath.split("/").some((part) => part === ".." || part === ".")) {
       return new Response("Bad path", { status: 400, headers: securityHeaders() });
     }
@@ -168,8 +168,8 @@ export default {
       ".png": "image/png", ".webp": "image/webp", ".xml": "application/xml; charset=utf-8",
       ".txt": "text/plain; charset=utf-8",
     };
-    const dot = decodedPath.lastIndexOf(".");
-    const ext = dot >= 0 ? decodedPath.slice(dot).toLowerCase() : "";
+    const dot = resolvedPath.lastIndexOf(".");
+    const ext = dot >= 0 ? resolvedPath.slice(dot).toLowerCase() : "";
     if (mime[ext]) headers.set("Content-Type", mime[ext]);
     return new Response(upstream.body, { status: upstream.status, headers });
   },

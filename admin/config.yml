@@ -2,7 +2,7 @@ backend:
   name: github
   repo: liberalreporters/babswebsite
   branch: cms-cloudflare-preview
-  base_url: https://babs-cms-preview.babsogunlade2027.workers.dev
+  base_url: https://babswebsite-preview.liberalreporters.workers.dev
   auth_endpoint: api/auth
 
 site_url: https://babswebsite-preview.liberalreporters.workers.dev

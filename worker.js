@@ -131,21 +131,31 @@ export default {
     if (url.pathname.startsWith("/api/")) {
       return new Response("Not found", { status: 404, headers: securityHeaders() });
     }
-    const path = url.pathname === "/" ? "index.html" : url.pathname.replace(/^[/]+/, "");
     let decodedPath;
-    try { decodedPath = decodeURIComponent(path); } catch { return new Response("Bad path", { status: 400 }); }
-    if (decodedPath.endsWith("/")) decodedPath += "index.html";
-    if (decodedPath.split("/").some((part) => part === ".." || part === ".")) {
-      return new Response("Bad path", { status: 400 });
+    try { decodedPath = decodeURIComponent(url.pathname); } catch { return new Response("Bad path", { status: 400, headers: securityHeaders() }); }
+    const cleanPath = decodedPath.replace(/\\/+$/, "").replace(/^\\/+/, "");
+    if (cleanPath.split("/").some((part) => part === ".." || part === ".")) {
+      return new Response("Bad path", { status: 400, headers: securityHeaders() });
     }
-    const encodedPath = decodedPath.split("/").map(encodeURIComponent).join("/");
-    const upstreamUrl = "https://raw.githubusercontent.com/liberalreporters/babswebsite/cms-cloudflare-preview/" + encodedPath;
-    const upstream = await fetch(upstreamUrl, { headers: { Accept: "*/*", "User-Agent": "BABS-Cloudflare-Preview" } });
-    if (!upstream.ok) {
-      return new Response(upstream.status === 404 ? "Not found" : "Preview source unavailable", {
-        status: upstream.status === 404 ? 404 : 502,
-        headers: securityHeaders({ "Content-Type": "text/plain; charset=utf-8" }),
-      });
+    let candidates;
+    if (!cleanPath) candidates = ["index.html"];
+    else if (cleanPath === "profile") candidates = ["about.html"];
+    else if (cleanPath.includes(".")) candidates = [cleanPath];
+    else candidates = [cleanPath + "/index.html", cleanPath + ".html"];
+
+    let upstream = null;
+    let resolvedPath = "";
+    for (const candidate of candidates) {
+      const encodedPath = candidate.split("/").map(encodeURIComponent).join("/");
+      const upstreamUrl = "https://raw.githubusercontent.com/liberalreporters/babswebsite/cms-cloudflare-preview/" + encodedPath;
+      const response = await fetch(upstreamUrl, { headers: { Accept: "*/*", "User-Agent": "BABS-Cloudflare-Preview" } });
+      if (response.ok) { upstream = response; resolvedPath = candidate; break; }
+      if (response.status !== 404) {
+        return new Response("Preview source unavailable", { status: 502, headers: securityHeaders({ "Content-Type": "text/plain; charset=utf-8" }) });
+      }
+    }
+    if (!upstream) {
+      return new Response("Not found", { status: 404, headers: securityHeaders({ "Content-Type": "text/plain; charset=utf-8" }) });
     }
     const headers = new Headers(upstream.headers);
     headers.set("Cache-Control", "no-store");

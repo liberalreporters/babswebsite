@@ -27,4 +27,17 @@ class SiteTests(unittest.TestCase):
     if url.endswith('/'): local=local/'index.html'
     if not local.exists() and not url.endswith(('.html','.css','.js','.json','.svg','.jpg','.png','.webp','.xml','.txt')): local=ROOT/(url.lstrip('/')+'.html')
     self.assertTrue(local.exists(),f'{p.relative_to(ROOT)} references missing {url}')
+
+ def test_decaps_cms_and_profile_assets(self):
+  cfg=(ROOT/'admin/config.yml').read_text()
+  self.assertIn('name: github',cfg)
+  self.assertIn('branch: cms-cloudflare-preview',cfg)
+  self.assertIn('auth_endpoint: api/auth',cfg)
+  self.assertNotIn('supabase',cfg.lower())
+  home=(ROOT/'index.html').read_text()
+  self.assertIn('/babatunde-ogunlade-portrait.jpg',home)
+  self.assertTrue((ROOT/'babatunde-ogunlade-portrait.jpg').exists())
+  worker=(ROOT/'worker.js').read_text()
+  self.assertIn('cms-cloudflare-preview',worker)
+  self.assertIn('window.opener.postMessage(message,allowedOrigin)',worker)
 if __name__=='__main__':unittest.main(verbosity=2)

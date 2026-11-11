@@ -170,7 +170,7 @@ export default {
       const cssResponse = await fetch(cssUrl, { headers: { Accept: "text/plain", "User-Agent": "BABS-Cloudflare-Preview" } });
       if (cssResponse.ok) {
         const css = await cssResponse.text();
-        const styleTag = "<style id=\"babs-site-styles\">" + css.replace(/<\\/style/gi, "<\\\\/style") + "</style>";
+        const styleTag = "<style id=\"babs-site-styles\">" + css.replaceAll("</style", "<\\/style") + "</style>";
         if (html.includes("</head>")) html = html.replace("</head>", styleTag + "</head>");
       }
       return new Response(html, { status: upstream.status, headers });
